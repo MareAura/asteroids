@@ -3,8 +3,8 @@ import axios from "axios";
 import './App.css'
 
 function App() {
-
-  const [asteroidsData, setAsteroidsData] = useState({})
+  
+  const [asteroidsData, setAsteroidsData] = useState([])
 
   useEffect(() => {
     axios
@@ -12,35 +12,53 @@ function App() {
                 `https://www.neowsapp.com/rest/v1/feed/today?api_key=3O93YcjVXfreFogJawULO4fHalcOlw8GYPn9BVut`
             )
             .then((response) => {
-                const data = response.data;
-                setAsteroidsData(data);
+                const convertedAsteroidsData = convertAsteroidsData(response.data)
+                setAsteroidsData(convertedAsteroidsData);
             });
   }, [])
 
-  let asteroidsList;
+  console.log(asteroidsData)
 
-  if (asteroidsData.near_earth_objects) {
-    
-    const nearEarthObjects = Object.values(asteroidsData.near_earth_objects)[0]
-
-    asteroidsList = nearEarthObjects.map((asteroid) => 
-        <div className='asteroid-card' key={asteroid.id}>
-          <div>{asteroid.close_approach_data[0].close_approach_date_full}</div>
-          <div>Name: {asteroid.name.slice(1, asteroid.name.length - 1)}</div>
-          <div>Distance: {asteroid.close_approach_data[0].miss_distance.kilometers.split('.')[0]} km</div>
-          <div>Distance: {asteroid.close_approach_data[0].miss_distance.lunar.split('.')[0]} lunar</div>
-          <div>Diametr: {String(asteroid.estimated_diameter.meters.estimated_diameter_max).split('.')[0]} meters</div>
-          {asteroid.is_potentially_hazardous_asteroid ? <div>Dangerous!</div> : <div>Not dangerous</div>}
-        </div>
-        )
-
-    console.log(nearEarthObjects)
-  }
 
   return (
-
-    asteroidsData && <div className='asteroids-list'>{asteroidsList}</div>
+    <div className='asteroids-list'>
+        {asteroidsData.map((asteroid) => {
+          return (
+            <div className='asteroid-card' key={asteroid.id}>
+              <div>{asteroid.closeApproachDate}</div>
+              <div>Name: {asteroid.name}</div>
+              <div>Distance: {asteroid.distanceKm} km</div>
+              <div>Distance: {asteroid.distanceLunar} lunar</div>
+              <div>Diameter: {asteroid.diameter} meters</div>
+              {asteroid.dangerous ? <div>Dangerous!</div> : <div>Not dangerous</div>}
+            </div>
+          ) 
+        })
+      }
+    </div>
   )
+}
+
+function convertAsteroidsData(rawData) {
+
+  const nearEarthObjects = Object.values(rawData.near_earth_objects)[0]
+
+  const asteroids = nearEarthObjects.map((rawAsteroid) => {
+        const asteroid = {
+          id: rawAsteroid.id,
+          closeApproachDate: rawAsteroid.close_approach_data[0].close_approach_date_full,
+          name: rawAsteroid.name.slice(1, rawAsteroid.name.length - 1),
+          distanceKm: rawAsteroid.close_approach_data[0].miss_distance.kilometers.split('.')[0],
+          distanceLunar: rawAsteroid.close_approach_data[0].miss_distance.lunar.split('.')[0],
+          diameter: String(rawAsteroid.estimated_diameter.meters.estimated_diameter_max).split('.')[0],
+          dangerous: rawAsteroid.is_potentially_hazardous_asteroid
+        }
+
+        return asteroid
+    }
+  )
+
+  return asteroids
 }
 
 export default App
