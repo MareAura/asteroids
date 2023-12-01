@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import './App.css'
+import { AsteroidCard } from './asteroidCard';
 
 function App() {
   
@@ -17,21 +18,14 @@ function App() {
             });
   }, [])
 
-  console.log(asteroidsData)
-
+  // console.log(asteroidsData)
+  
 
   return (
     <div className='asteroids-list'>
         {asteroidsData.map((asteroid) => {
           return (
-            <div className='asteroid-card' key={asteroid.id}>
-              <div>{asteroid.closeApproachDate}</div>
-              <div>Name: {asteroid.name}</div>
-              <div>Distance: {asteroid.distanceKm} km</div>
-              <div>Distance: {asteroid.distanceLunar} lunar</div>
-              <div>Diameter: {asteroid.diameter} meters</div>
-              {asteroid.dangerous ? <div>Dangerous!</div> : <div>Not dangerous</div>}
-            </div>
+            <AsteroidCard asteroid={asteroid}/>
           ) 
         })
       }
