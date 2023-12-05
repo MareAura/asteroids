@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function AsteroidPage() {
 
@@ -32,8 +33,37 @@ function AsteroidPage() {
             <div> Estimated diameter (min): {asteroidData.diameterMin} m</div>
             <div>Estimated diameter (max): {asteroidData.diameterMax} m</div>
             {asteroidData.dangerous ? <div>Dangerous!</div> : <div>Not dangerous</div>}
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Date</th>
+                        <th>Relative Velocity, km/Sececond </th>
+                        <th>Relative Velocity, km/Hour </th>
+                        <th>Distance to Earth, km</th>
+                        <th>Distance to Earth, lunar</th>
+                        <th>Orbiting body</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {asteroidData.approachesData.map((data, index) => {
+                    return (
+                    <tr>
+                        <td>{index + 1}</td>
+                        <td>{data.fullDate}</td>
+                        <td>{data.relativeVelocityKmPerSec}</td>
+                        <td>{data.relativeVelocityKmPerH}</td>
+                        <td>{data.distanceKm}</td>
+                        <td>{data.distanceLunar}</td>
+                        <td>{data.orbitingBody}</td>
+                    </tr>
+                    )
+                })}
+                </tbody>
+            </table>
         </div>
-        : null}    
+        : null}
+        <Link to={`/`}>Main page</Link>    
     </div>
   )
 }
