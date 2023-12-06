@@ -20,10 +20,6 @@ function AsteroidPage() {
                     setAsteroidData(convertedAsteroidData);
                 });
       }, [])
-
-
-      console.log(asteroidData)
-
     
   return (
     <div>
@@ -38,8 +34,8 @@ function AsteroidPage() {
                     <tr>
                         <th>No.</th>
                         <th>Date</th>
-                        <th>Relative Velocity, km/Sececond </th>
-                        <th>Relative Velocity, km/Hour </th>
+                        <th>Relative Velocity, km/sec </th>
+                        <th>Relative Velocity, km/hour </th>
                         <th>Distance to Earth, km</th>
                         <th>Distance to Earth, lunar</th>
                         <th>Orbiting body</th>

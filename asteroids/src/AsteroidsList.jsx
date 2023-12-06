@@ -42,9 +42,9 @@ function convertAsteroidsData(rawData) {
             id: rawAsteroid.id,
             closeApproachDate: rawAsteroid.close_approach_data[0].close_approach_date_full,
             name: rawAsteroid.name.slice(1, rawAsteroid.name.length - 1),
-            distanceKm: rawAsteroid.close_approach_data[0].miss_distance.kilometers.split('.')[0],
-            distanceLunar: rawAsteroid.close_approach_data[0].miss_distance.lunar.split('.')[0],
-            diameter: String(rawAsteroid.estimated_diameter.meters.estimated_diameter_max).split('.')[0],
+            distanceKm: Math.round(rawAsteroid.close_approach_data[0].miss_distance.kilometers),
+            distanceLunar: Math.round(rawAsteroid.close_approach_data[0].miss_distance.lunar),
+            diameter: Math.round(rawAsteroid.estimated_diameter.meters.estimated_diameter_max),
             dangerous: rawAsteroid.is_potentially_hazardous_asteroid
           }
   
