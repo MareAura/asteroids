@@ -44,7 +44,7 @@ function AsteroidPage() {
                 <tbody>
                 {asteroidData.approachesData.map((data, index) => {
                     return (
-                    <tr>
+                    <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{data.fullDate}</td>
                         <td>{data.relativeVelocityKmPerSec}</td>

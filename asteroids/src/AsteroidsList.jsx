@@ -11,6 +11,8 @@ function AsteroidsList() {
 
     const [distanceInKm, setDistanceInKm] = useState(true)
 
+    const [ page, setPage] = useState(1)
+
 
     useEffect(() => {
       axios
@@ -18,10 +20,10 @@ function AsteroidsList() {
                   `https://www.neowsapp.com/rest/v1/feed/today?api_key=3O93YcjVXfreFogJawULO4fHalcOlw8GYPn9BVut`
               )
               .then((response) => {
-                  const convertedAsteroidsData = convertAsteroidsData(response.data)
+                  const convertedAsteroidsData = convertAsteroidsData(response.data).slice(0, (5 * page))
                   setAsteroidsData(convertedAsteroidsData);
               });
-    }, [])
+    }, [page])
 
     let distanceUnitButton
 
@@ -43,6 +45,7 @@ function AsteroidsList() {
               ) 
             })
           }
+          <button onClick={() => setPage(page + 1)}>More</button>
     </div>
   )
 }
