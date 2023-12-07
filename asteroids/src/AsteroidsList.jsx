@@ -1,13 +1,16 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from "axios";
-import { AsteroidCard } from './asteroidCard';
+import { AsteroidCard } from './AsteroidCard.jsx';
 import { Link } from 'react-router-dom';
 
 
 function AsteroidsList() {
 
     const [asteroidsData, setAsteroidsData] = useState([])
+
+    const [distanceInKm, setDistanceInKm] = useState(true)
+
 
     useEffect(() => {
       axios
@@ -19,13 +22,24 @@ function AsteroidsList() {
                   setAsteroidsData(convertedAsteroidsData);
               });
     }, [])
+
+    let distanceUnitButton
+
+    if(distanceInKm) {
+        distanceUnitButton = <button onClick={() => setDistanceInKm(false)}>Show distance in lunar</button>
+    } else {
+        distanceUnitButton = <button onClick={() => setDistanceInKm(true)}>Show distance in kilometers</button>
+    }
   
 
   return (
     <div className='asteroids-list'>
+        {distanceUnitButton}
             {asteroidsData.map((asteroid) => {
               return (
-                <Link to={`/${asteroid.id}`} key={asteroid.id}><AsteroidCard asteroid={asteroid} /></Link>
+                <Link to={`/${asteroid.id}`} key={asteroid.id}>
+                    <AsteroidCard asteroid={asteroid} distanceInKm={distanceInKm}/>
+                </Link>
               ) 
             })
           }
