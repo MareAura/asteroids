@@ -20,10 +20,10 @@ function AsteroidsList() {
                   `https://www.neowsapp.com/rest/v1/feed/today?api_key=3O93YcjVXfreFogJawULO4fHalcOlw8GYPn9BVut`
               )
               .then((response) => {
-                  const convertedAsteroidsData = convertAsteroidsData(response.data).slice(0, (5 * page))
+                  const convertedAsteroidsData = convertAsteroidsData(response.data)
                   setAsteroidsData(convertedAsteroidsData);
               });
-    }, [page])
+    }, [])
 
     let distanceUnitButton
 
@@ -32,12 +32,15 @@ function AsteroidsList() {
     } else {
         distanceUnitButton = <button onClick={() => setDistanceInKm(true)}>Show distance in kilometers</button>
     }
+
+    const asteroidsShown = 5 * page
+    const fullAsteroidsDataShown = asteroidsShown >= asteroidsData.length
   
 
   return (
     <div className='asteroids-list'>
         {distanceUnitButton}
-            {asteroidsData.map((asteroid) => {
+            {asteroidsData.slice(0, asteroidsShown).map((asteroid) => {
               return (
                 <Link to={`/${asteroid.id}`} key={asteroid.id}>
                     <AsteroidCard asteroid={asteroid} distanceInKm={distanceInKm}/>
@@ -45,7 +48,7 @@ function AsteroidsList() {
               ) 
             })
           }
-          <button onClick={() => setPage(page + 1)}>More</button>
+          {!fullAsteroidsDataShown && <button onClick={() => setPage(page + 1)}>More</button>}
     </div>
   )
 }
