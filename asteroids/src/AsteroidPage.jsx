@@ -10,6 +10,10 @@ function AsteroidPage() {
 
     let { asteroidId } = useParams()
 
+    const [distanceInKm, setDistanceInKm] = useState(true)
+
+    const [velocityInKmH, setvelocityInKmH] = useState(true)
+
     useEffect(() => {
         axios
                 .get(
@@ -21,44 +25,76 @@ function AsteroidPage() {
                 });
       }, [])
     
+
+      let distanceUnitButton
+
+      if(distanceInKm) {
+          distanceUnitButton = <button onClick={() => setDistanceInKm(false)}>Show distance in lunar</button>
+      } else {
+          distanceUnitButton = <button onClick={() => setDistanceInKm(true)}>Show distance in kilometers</button>
+      }
+
+      let velocityUnitButton
+
+      if(velocityInKmH) {
+        velocityUnitButton = <button onClick={() => setvelocityInKmH(false)}>Show distance in km/sec</button>
+      } else {
+        velocityUnitButton = <button onClick={() => setvelocityInKmH(true)}>Show distance in km/hour</button>
+      }
+
+
+
+
   return (
     <div>
-    {asteroidData ? 
-        <div>
-            <div>Name: {asteroidData.name}</div>
-            <div> Estimated diameter (min): {asteroidData.diameterMin} m</div>
-            <div>Estimated diameter (max): {asteroidData.diameterMax} m</div>
-            {asteroidData.dangerous ? <div>Dangerous!</div> : <div>Not dangerous</div>}
-            <table>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Date</th>
-                        <th>Relative Velocity, km/sec </th>
-                        <th>Relative Velocity, km/hour </th>
-                        <th>Distance to Earth, km</th>
-                        <th>Distance to Earth, lunar</th>
-                        <th>Orbiting body</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {asteroidData.approachesData.map((data, index) => {
-                    return (
-                    <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{data.fullDate}</td>
-                        <td>{data.relativeVelocityKmPerSec}</td>
-                        <td>{data.relativeVelocityKmPerH}</td>
-                        <td>{data.distanceKm}</td>
-                        <td>{data.distanceLunar}</td>
-                        <td>{data.orbitingBody}</td>
-                    </tr>
-                    )
-                })}
-                </tbody>
-            </table>
-        </div>
-        : null}
+        {asteroidData ? 
+            <div>
+                <div>Name: {asteroidData.name}</div>
+                <div> Estimated diameter (min): {asteroidData.diameterMin} m</div>
+                <div>Estimated diameter (max): {asteroidData.diameterMax} m</div>
+                {asteroidData.dangerous ? <div>Dangerous!</div> : <div>Not dangerous</div>}
+
+                {velocityUnitButton}
+                {distanceUnitButton}
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Date</th>
+                            {velocityInKmH
+                                ? <th>Relative Velocity, km/hour</th>
+                                : <th>Relative Velocity, km/sec</th>
+                            }
+                            {distanceInKm 
+                                ? <th>Distance to Earth, km</th>
+                                : <th>Distance to Earth, lunar</th>
+                            }
+                            <th>Orbiting body</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {asteroidData.approachesData.map((data, index) => {
+                        return (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{data.fullDate}</td>
+                            {velocityInKmH 
+                                ? <td>{data.relativeVelocityKmPerH}</td>
+                                : <td>{data.relativeVelocityKmPerSec}</td>
+                            }
+                            {distanceInKm 
+                                ? <td>{data.distanceKm}</td>
+                                : <td>{data.distanceLunar}</td>
+                            }
+                            <td>{data.orbitingBody}</td>
+                        </tr>
+                        )
+                    })}
+                    </tbody>
+                </table>
+            </div>
+            : null}
         <Link to={`/`}>Main page</Link>    
     </div>
   )
