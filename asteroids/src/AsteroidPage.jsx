@@ -95,7 +95,6 @@ function AsteroidPage() {
                 </table>
             </div>
             : null}
-        <Link to={`/`}>Main page</Link>    
     </div>
   )
 }
