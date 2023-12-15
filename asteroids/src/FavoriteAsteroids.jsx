@@ -1,8 +1,12 @@
 import React from 'react'
 
-function FavoriteAsteroids() {
+function FavoriteAsteroids(props) {
   return (
-    <div>FavoriteAsteroids</div>
+    <div>
+        {props.favorite.map((asteroid) => {
+            return (<div key={asteroid.id}>{asteroid.name}</div>)
+        })}
+    </div>
   )
 }
 

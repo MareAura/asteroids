@@ -12,7 +12,7 @@ import { enGB } from 'date-fns/locale';
 registerLocale('en-GB', enGB)
 
 
-function AsteroidsList() {
+function AsteroidsList(props) {
 
     const [asteroidsData, setAsteroidsData] = useState([])
 
@@ -46,7 +46,6 @@ function AsteroidsList() {
     const asteroidsShown = 5 * page
     const fullAsteroidsDataShown = asteroidsShown >= asteroidsData.length
     
-
   return (
     <div className='asteroids-list'>
        <div>
@@ -88,7 +87,7 @@ function AsteroidsList() {
                 <Link to={`/${asteroid.id}`}>
                     <AsteroidCard asteroid={asteroid} distanceInKm={distanceInKm}/>
                 </Link>
-                <button>Add to favorite</button>
+                <button onClick={() => props.addFavorite(asteroid)}>Add to favorite</button>
                 </div>
               ) 
             })
