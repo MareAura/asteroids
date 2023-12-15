@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AsteroidPage from './AsteroidPage';
 import { Routes, Route } from 'react-router-dom'
 import AsteroidsList from './AsteroidsList';
@@ -8,13 +8,26 @@ import FavoriteAsteroids from './FavoriteAsteroids';
 
 function App() {
 
-  const [favoriteAsteroids, setFavoriteAsteroids] = useState([])
+  const [favoriteAsteroids, setFavoriteAsteroids] = useState(JSON.parse(localStorage.getItem('favoriteAsteroids')) || [])
+
+  useEffect(() => {
+    const favoriteAsteroids = JSON.parse(localStorage.getItem('favoriteAsteroids'));
+    console.log("got from storage", favoriteAsteroids)
+    if (favoriteAsteroids) {
+      setFavoriteAsteroids(favoriteAsteroids);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('favoriteAsteroids', JSON.stringify(favoriteAsteroids));
+    console.log('saving', favoriteAsteroids)
+  }, [favoriteAsteroids]);
+
+
 
   const addFavorite = (asteroid) => {
     setFavoriteAsteroids([...favoriteAsteroids, asteroid]);
   };
-
-  console.log(favoriteAsteroids)
 
   return (
     <div>
