@@ -29,13 +29,18 @@ function App() {
     setFavoriteAsteroids([...favoriteAsteroids, asteroid]);
   };
 
+  const removeFavorite = (asteroidId) => {
+      const afterRemove = favoriteAsteroids.filter((asteroid) => asteroid.id !== asteroidId)
+      setFavoriteAsteroids(afterRemove)
+  }
+
   return (
     <div>
       <Navbar/>
       <Routes>
-          <Route path='/' element={<AsteroidsList addFavorite={addFavorite}/>}/>
+          <Route path='/' element={<AsteroidsList addFavorite={addFavorite} />}/>
           <Route path='/:asteroidId' element={<AsteroidPage />}/>
-          <Route path='/favorite' element={<FavoriteAsteroids favorite={favoriteAsteroids}/>}/>
+          <Route path='/favorite' element={<FavoriteAsteroids favorite={favoriteAsteroids} removeFavorite={removeFavorite}/>}/>
       </Routes>
     </div>
   )
