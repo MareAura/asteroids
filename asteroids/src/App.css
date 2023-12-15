@@ -18,3 +18,10 @@ th, td {
   padding-left: 15px;
   padding-right: 15px;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 700px;
+  margin: 15px;
+}
