@@ -84,9 +84,12 @@ function AsteroidsList() {
         {distanceUnitButton}
             {asteroidsData.slice(0, asteroidsShown).map((asteroid) => {
               return (
-                <Link to={`/${asteroid.id}`} key={asteroid.id}>
+                <div key={asteroid.id}>
+                <Link to={`/${asteroid.id}`}>
                     <AsteroidCard asteroid={asteroid} distanceInKm={distanceInKm}/>
                 </Link>
+                <button>Add to favorite</button>
+                </div>
               ) 
             })
           }
@@ -103,7 +106,9 @@ function convertAsteroidsData(rawData) {
           const asteroid = {
             id: rawAsteroid.id,
             closeApproachDate: rawAsteroid.close_approach_data[0].close_approach_date_full,
-            name: rawAsteroid.name.slice(1, rawAsteroid.name.length - 1),
+            name: rawAsteroid.name[0] === '(' 
+                  ? rawAsteroid.name.slice(1, rawAsteroid.name.length - 1) 
+                  : rawAsteroid.name,
             distanceKm: Math.round(rawAsteroid.close_approach_data[0].miss_distance.kilometers),
             distanceLunar: Math.round(rawAsteroid.close_approach_data[0].miss_distance.lunar),
             diameter: Math.round(rawAsteroid.estimated_diameter.meters.estimated_diameter_max),
