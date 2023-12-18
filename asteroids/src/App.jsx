@@ -12,7 +12,6 @@ function App() {
 
   useEffect(() => {
     const favoriteAsteroids = JSON.parse(localStorage.getItem('favoriteAsteroids'));
-    console.log("got from storage", favoriteAsteroids)
     if (favoriteAsteroids) {
       setFavoriteAsteroids(favoriteAsteroids);
     }
@@ -20,7 +19,6 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('favoriteAsteroids', JSON.stringify(favoriteAsteroids));
-    console.log('saving', favoriteAsteroids)
   }, [favoriteAsteroids]);
 
 
@@ -38,7 +36,7 @@ function App() {
     <div>
       <Navbar/>
       <Routes>
-          <Route path='/' element={<AsteroidsList addFavorite={addFavorite} />}/>
+          <Route path='/' element={<AsteroidsList addFavorite={addFavorite} removeFavorite={removeFavorite} favorite={favoriteAsteroids}/>}/>
           <Route path='/:asteroidId' element={<AsteroidPage />}/>
           <Route path='/favorite' element={<FavoriteAsteroids favorite={favoriteAsteroids} removeFavorite={removeFavorite}/>}/>
       </Routes>

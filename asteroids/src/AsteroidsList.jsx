@@ -82,12 +82,18 @@ function AsteroidsList(props) {
       </div>
         {distanceUnitButton}
             {asteroidsData.slice(0, asteroidsShown).map((asteroid) => {
+              
+              const isFavorite = props.favorite.some((item) => item.id === asteroid.id)
+              
               return (
                 <div key={asteroid.id}>
-                <Link to={`/${asteroid.id}`}>
-                    <AsteroidCard asteroid={asteroid} distanceInKm={distanceInKm}/>
-                </Link>
-                <button onClick={() => props.addFavorite(asteroid)}>Add to favorite</button>
+                  <Link to={`/${asteroid.id}`}>
+                      <AsteroidCard asteroid={asteroid} distanceInKm={distanceInKm}/>
+                  </Link>
+                  {!isFavorite 
+                    ?<button onClick={() => props.addFavorite(asteroid)}>Add to favorite</button>
+                    :<button onClick={() => props.removeFavorite(asteroid.id)}>Remove from favorite</button>
+                  }
                 </div>
               ) 
             })
