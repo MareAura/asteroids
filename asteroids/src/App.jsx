@@ -35,11 +35,13 @@ function App() {
   return (
     <div>
       <Navbar/>
+      <div className='main-content'>
       <Routes>
           <Route path='/' element={<AsteroidsList addFavorite={addFavorite} removeFavorite={removeFavorite} favorite={favoriteAsteroids}/>}/>
           <Route path='/:asteroidId' element={<AsteroidPage />}/>
           <Route path='/favorite' element={<FavoriteAsteroids favorite={favoriteAsteroids} removeFavorite={removeFavorite}/>}/>
       </Routes>
+      </div>
     </div>
   )
 }

@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 function FavoriteAsteroids(props) {
   return (
@@ -6,7 +8,7 @@ function FavoriteAsteroids(props) {
         {props.favorite.map((asteroid) => {
             return (
             <div key={asteroid.id}>
-                <span>{asteroid.name}</span>
+                <Link to={`/${asteroid.id}`}>{asteroid.name}</Link>
                 <button onClick={() => props.removeFavorite(asteroid.id)}>X</button>
             </div>)
         })}
