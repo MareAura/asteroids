@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 a {
@@ -9,15 +10,17 @@ a {
 }
 
 body {
-  background-image: url(./assets/asteroids.png);
-  background-size: auto;
+  /* background-image: url(./assets/asteroids.png); */
+  /* background-size: auto; */
+  background-color: black;
   color: white;
 }
 
 .main-content {
-  width: 800px;
+  width: 900px;
   margin: 0 auto;
-  background-color:rgba(0, 0, 0, 0.9);
+  /* padding: 0 15px; */
+  /* background-color:rgba(0, 0, 0, 0.945); */
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -28,13 +31,65 @@ body {
   padding: 15px 0;
 }
 
-.asteroids-list {
-  
+.distance-unit-btn {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
-.asteroid-card {
-  border: 1px solid grey;
-  padding: 10px;
+.main-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.asteroids-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+  margin: 25px 0 15px 0;
+}
+
+.asteroid-card-wrapper {
+  background-color: rgba(17, 17, 17, 0.884);
+  padding: 10px 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: calc((100% - 30px)/3);
+}
+
+.favorite-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.favorite-btn-icon:hover {
+  scale: 1.1;
+}
+
+.favorite-btn-icon{
+  width: 25px;
+}
+
+.more-btn {
+  background-color: rgb(248, 91, 0);
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  padding: 5px 15px;
+  margin: 0px auto 15px auto;
+  width: 150px;
 }
 
 table, th, td {
@@ -62,7 +117,7 @@ th, td {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 770px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -74,11 +129,6 @@ th, td {
   width: 35px;
 }
 
-/* .navbar-favorite-btn-text {
-  text-decoration: none;
-  padding-right: 10px;
-  font-family: 'Open Sans', sans-serif;} */
-
 .navbar-favorite-btn{
   display: flex;
   align-items: center;
@@ -86,29 +136,4 @@ th, td {
 
 .navbar-favorite-btn:hover {
   scale: 1.1;
-}
-
-
-.tooltip {
-  position: relative;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  color: #fff;
-  text-align: center;
-  border-radius: 3px;
-  padding: 5px;
-  font-family: 'Oswald', sans-serif;
-  font-size: 18px;
-
-  /* Position the tooltip */
-  position: absolute;
-  right: 105%;
-  z-index: 1;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
 }

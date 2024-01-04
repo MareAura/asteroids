@@ -11,8 +11,7 @@ function Navbar() {
           <img src={logo} alt='logo' className='logo'/>
         </Link>
         <Link to={`/favorite`}>
-          <div className='navbar-favorite-btn tooltip'>
-            <span className='tooltiptext'> Favorite asteroids</span>
+          <div className='navbar-favorite-btn'>
             <img src={comet} alt='favorite asteroids' className='navbar-favorite-btn-icon'/></div>
         </Link>
       </div>
