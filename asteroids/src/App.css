@@ -92,18 +92,6 @@ body {
   width: 150px;
 }
 
-table, th, td {
-  border: 1px solid rgb(255, 255, 255);
-  border-collapse: collapse;
-}
-
-th, td {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 .navbar-wrapper {
   padding: 15px 15px;
   background-color: rgb(0, 0, 0);

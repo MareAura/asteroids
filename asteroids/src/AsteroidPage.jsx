@@ -2,6 +2,10 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import diameterIcon from './assets/diameter.png'
+import warningSign from './assets/warning-sign.png'
+import warningSignGrey from './assets/warning-sign-grey.png'
+import './asteroidPage.css'
 
 function AsteroidPage() {
 
@@ -28,17 +32,41 @@ function AsteroidPage() {
       let distanceUnitButton
 
       if(distanceInKm) {
-          distanceUnitButton = <button onClick={() => setDistanceInKm(false)}>Show distance in lunar</button>
+          distanceUnitButton = 
+          <button 
+            className='unit-btn'
+            onClick={() => setDistanceInKm(false)}
+          >
+            Show distance in lunar
+          </button>
       } else {
-          distanceUnitButton = <button onClick={() => setDistanceInKm(true)}>Show distance in kilometers</button>
+          distanceUnitButton = 
+          <button 
+            onClick={() => setDistanceInKm(true)}
+            className='unit-btn'
+          >
+            Show distance in kilometers
+            </button>
       }
 
       let velocityUnitButton
 
       if(velocityInKmH) {
-        velocityUnitButton = <button onClick={() => setvelocityInKmH(false)}>Show distance in km/sec</button>
+        velocityUnitButton = 
+        <button 
+            onClick={() => setvelocityInKmH(false)}
+            className='unit-btn'
+            >
+                Show velocity in km/sec
+        </button>
       } else {
-        velocityUnitButton = <button onClick={() => setvelocityInKmH(true)}>Show distance in km/hour</button>
+        velocityUnitButton = 
+        <button 
+            onClick={() => setvelocityInKmH(true)}
+            className='unit-btn'
+        >
+            Show velocity in km/hour
+        </button>
       }
 
 
@@ -46,16 +74,25 @@ function AsteroidPage() {
   return (
     <div>
         {asteroidData ? 
-            <div>
-                <div>Name: {asteroidData.name}</div>
-                <div>Estimated diameter (min): {asteroidData.diameterMin} m</div>
-                <div>Estimated diameter (max): {asteroidData.diameterMax} m</div>
-                {asteroidData.dangerous ? <div>Dangerous!</div> : <div>Not dangerous</div>}
+            <div className='asteroid-info'>
+                <div className='asteroid-name'>Asteroid {asteroidData.name}</div>
+                <div className='asteroid-info-line'> 
+                    <img src={diameterIcon} alt='diameter icon'/>
+                    Estimated diameter, meters: {asteroidData.diameterMin} (min) - {asteroidData.diameterMax} (max)
+                </div>
+                {asteroidData.dangerous 
+                    ? <div className='asteroid-info-line'><img src={warningSign} alt='warning sign icon'/>Dangerous!</div> 
+                    : <div className='asteroid-info-line'><img src={warningSignGrey} alt='warning sign icon'/>Not dangerous</div>
+                }
 
-                {velocityUnitButton}
-                {distanceUnitButton}
+                <div className='asteroid-info-header'>Detailed information about all approaches of asteroid {asteroidData.name}</div>
 
-                <table>
+                <div className='unit-btns'>
+                    {velocityUnitButton}
+                    {distanceUnitButton}
+                </div>
+
+                <table className='asteroid-table'>
                     <thead>
                         <tr>
                             <th>No.</th>
