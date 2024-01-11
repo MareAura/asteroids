@@ -39,10 +39,12 @@ export const AsteroidCard = (props) => {
   return (
     <div className='asteroid-card' key={props.asteroid.id}>
               <div className='asteroid-avatar'>
-                <img src={asteroidRock} 
+                <Link to={`/${props.asteroid.id}`}>
+                  <img src={asteroidRock} 
                   alt='asteroid rock' 
                   className='asteroid-avatar-icon' 
                   style={{width: asteroidPictureSize}}/>
+                </Link>
               </div>
               <div className='asterid-card-name'>
                     <Link to={`/${props.asteroid.id}`}>

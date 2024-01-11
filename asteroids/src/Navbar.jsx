@@ -8,10 +8,10 @@ function Navbar() {
     <div className='navbar-wrapper'>
       <div className='navbar'>
         <Link to={`/`}>
-          <img src={logo} alt='logo' className='logo'/>
+          <img src={logo} alt='logo' className='logo' title='Main page'/>
         </Link>
         <Link to={`/favorite`}>
-          <div className='navbar-favorite-btn'>
+          <div className='navbar-favorite-btn' title='Favorite asteroids'>
             <img src={comet} alt='favorite asteroids' className='navbar-favorite-btn-icon'/></div>
         </Link>
       </div>
