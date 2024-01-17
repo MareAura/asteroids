@@ -5,9 +5,11 @@ import { useParams } from 'react-router-dom';
 import diameterIcon from './assets/diameter.png'
 import warningSign from './assets/warning-sign.png'
 import warningSignGrey from './assets/warning-sign-grey.png'
+import comet from './assets/comet.png';
+import cometGrey from './assets/comet-grey.png'
 import './asteroidPage.css'
 
-function AsteroidPage() {
+function AsteroidPage(props) {
 
     const [asteroidData, setAsteroidData] = useState(null)
 
@@ -69,6 +71,8 @@ function AsteroidPage() {
         </button>
       }
 
+      const isFavorite = props.favorite.some((item) => item.id === asteroidId)
+
 
 
   return (
@@ -76,6 +80,16 @@ function AsteroidPage() {
         {asteroidData ? 
             <div className='asteroid-info'>
                 <div className='asteroid-name'>Asteroid {asteroidData.name}</div>
+                <div className='favorite-btn-wrapper'>
+                    {!isFavorite 
+                        ?<button onClick={() => props.addFavorite(asteroidData)} className='favorite-btn-big' title='Add to favorite'>
+                            Add to favorite<img src={cometGrey} alt='add to favorite asteroid' className='favorite-btn-big-icon'/>
+                        </button>
+                        :<button onClick={() => props.removeFavorite(asteroidId)} className='favorite-btn-big' title='Remove from favorite'>
+                            Remove from favorite<img src={comet} alt='remove favorite asteroid' className='favorite-btn-big-icon'/>
+                        </button>
+                    }
+                </div>
                 <div className='asteroid-info-line'> 
                     <img src={diameterIcon} alt='diameter icon'/>
                     Estimated diameter, meters: {asteroidData.diameterMin} (min) - {asteroidData.diameterMax} (max)

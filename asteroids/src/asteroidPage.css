@@ -7,8 +7,34 @@
     font-weight: bold;
     display: flex;
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: rgb(248, 91, 0);
+}
+
+.favorite-btn-wrapper {
+    display: flex;
+    justify-content: flex-end    
+}
+
+.favorite-btn-big {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    /* justify-content: flex-end; */
+    color: white;
+    font-size: 16px;
+    text-decoration: underline;
+}
+  
+.favorite-btn-big-icon:hover {
+    scale: 1.1;
+}
+
+.favorite-btn-big-icon{
+    width: 35px;
+    padding-left: 8px;
 }
 
 .asteroid-info-line {
@@ -41,6 +67,10 @@
 }
 
 table {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    max-height: 400px;
     border-collapse: collapse;
     background-color: rgb(10, 10, 10);
     margin: 15px 0;
@@ -59,22 +89,11 @@ th, td {
     text-align: center;
 }
 
-
-thead {
-    color: rgb(255, 176, 58); 
-}
-
-table {
-    display: flex;
-    flex-flow: column;
-    width: 100%;
-    max-height: 430px;
-    
-}
-
 thead {
     padding-right: 13px;
     flex: 0 0 auto;
+    color: rgb(255, 176, 58); 
+
 }
 
 tbody {
