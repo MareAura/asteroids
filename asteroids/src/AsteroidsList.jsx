@@ -24,9 +24,12 @@ function AsteroidsList(props) {
 
     const [date, setDate] = useState(new Date());
 
+    const [isLoading, setIsLoading] = useState(true)
+
     const convertedDate = date.toISOString().slice(0, 10)
 
     useEffect(() => {
+      setIsLoading(true)
       axios
               .get(
                   `https://www.neowsapp.com/rest/v1/feed?start_date=${convertedDate}&end_date=${convertedDate}?api_key=3O93YcjVXfreFogJawULO4fHalcOlw8GYPn9BVut`
@@ -34,6 +37,7 @@ function AsteroidsList(props) {
               .then((response) => {
                   const convertedAsteroidsData = convertAsteroidsData(response.data)
                   setAsteroidsData(convertedAsteroidsData);
+                  setIsLoading(false)
               });
     }, [convertedDate])
 
@@ -71,7 +75,9 @@ function AsteroidsList(props) {
           />
       </div>
       <span>{distanceUnitButton}</span>
-      <div className='asteroids-list'>
+      {isLoading 
+        ? <div className='loader'><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+        : <><div className='asteroids-list'>
             {asteroidsData.slice(0, asteroidsShown).map((asteroid) => {
               
               const isFavorite = props.favorite.some((item) => item.id === asteroid.id)
@@ -92,7 +98,11 @@ function AsteroidsList(props) {
             })
           }
       </div>
-          {!fullAsteroidsDataShown && <button onClick={() => setPage(page + 1)} className='more-btn'>Show more</button>}
+      {!fullAsteroidsDataShown && <button onClick={() => setPage(page + 1)} className='more-btn'>Show more</button>}
+      </>
+      }
+      
+          
     </div>
   )
 }

@@ -19,7 +19,10 @@ function AsteroidPage(props) {
 
     const [velocityInKmH, setvelocityInKmH] = useState(true)
 
+    const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
+        setIsLoading(true)
         axios
                 .get(
                     `https://www.neowsapp.com/rest/v1/neo/${asteroidId}?api_key=3O93YcjVXfreFogJawULO4fHalcOlw8GYPn9BVut`
@@ -27,6 +30,7 @@ function AsteroidPage(props) {
                 .then((response) => {
                     const convertedAsteroidData = convertAsteroidData(response.data)
                     setAsteroidData(convertedAsteroidData);
+                    setIsLoading(false)
                 });
       }, [])
     
@@ -77,7 +81,9 @@ function AsteroidPage(props) {
 
   return (
     <div>
-        {asteroidData ? 
+        {isLoading 
+        ? <div className='loader'><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+        : <>{asteroidData ? 
             <div className='asteroid-info'>
                 <div className='asteroid-name'>Asteroid {asteroidData.name}</div>
                 <div className='favorite-btn-wrapper'>
@@ -144,6 +150,7 @@ function AsteroidPage(props) {
                 </table>
             </div>
             : null}
+        </>}
     </div>
   )
 }
