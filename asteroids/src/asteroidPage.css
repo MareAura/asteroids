@@ -22,10 +22,10 @@
     cursor: pointer;
     display: flex;
     align-items: flex-end;
-    /* justify-content: flex-end; */
     color: white;
     font-size: 16px;
     text-decoration: underline;
+    padding-bottom: 15px;
 }
   
 .favorite-btn-big-icon:hover {
@@ -66,11 +66,17 @@
     text-align: left;
 }
 
+@media (max-width: 545px) {  
+    .unit-btn {
+      padding: 5px 0;
+    }
+  }
+
 table {
     display: flex;
     flex-flow: column;
     width: 100%;
-    max-height: 400px;
+    max-height: 55vh;
     border-collapse: collapse;
     background-color: rgb(10, 10, 10);
     margin: 15px 0;
