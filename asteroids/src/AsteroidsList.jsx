@@ -61,7 +61,11 @@ function AsteroidsList(props) {
           <DatePicker
               showIcon
               selected={date}
-              onChange={(newDate) => setDate(newDate)}
+              onChange={(newDate) => {
+                setDate(newDate)
+                setPage(1)
+              }
+            }
               locale="en-GB"
               dateFormat="dd MMMM yyyy"
           />
