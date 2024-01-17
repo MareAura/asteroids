@@ -57,7 +57,7 @@ function AsteroidsList(props) {
   return (
     <div className='main-page'>
       <div className='date-picker'>
-        <div>Pick a date to display a list of asteroids approaches to Earth</div>
+        <span className='date-picker-text'>Pick a date to display a list of asteroids approaches to Earth</span>
           <DatePicker
               showIcon
               selected={date}

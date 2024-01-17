@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import logo from './assets/logo.png'
+import logo from './assets/logo1.png'
 import comet from './assets/comet.png'
 
 function Navbar() {
@@ -8,7 +8,10 @@ function Navbar() {
     <div className='navbar-wrapper'>
       <div className='navbar'>
         <Link to={`/`}>
-          <img src={logo} alt='logo' className='logo' title='Main page'/>
+          <div className='logo-wrapper'>
+            <img src={logo} alt='logo' className='logo-icon' title='Main page'/>
+            <span className='logo-text'>Asteroid Guard</span>
+          </div>
         </Link>
         <Link to={`/favorite`}>
           <div className='navbar-favorite-btn' title='Favorite asteroids'>

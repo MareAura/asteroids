@@ -10,14 +10,17 @@ a {
 }
 
 body {
-  /* background-image: url(./assets/asteroids.png); */
-  /* background-size: auto; */
+  background-image: url(./assets/background3.png);
+  background-size: cover;
+  background-position: left;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   background-color: black;
   color: white;
 }
 
 .main-content {
-  width: 900px;
+  max-width: 900px;
   margin: 0 auto;
   /* padding: 0 15px; */
   /* background-color:rgba(0, 0, 0, 0.945); */
@@ -26,9 +29,13 @@ body {
 
 .date-picker {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 15px 0;
+}
+
+.date-picker-text {
+  margin-bottom: 10px;
 }
 
 .distance-unit-btn {
@@ -60,6 +67,7 @@ body {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  min-width: 250px;
   width: calc((100% - 30px)/3);
 }
 
@@ -70,6 +78,7 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  color: white;
 }
 
 .favorite-btn-icon:hover {
@@ -90,10 +99,15 @@ body {
   padding: 5px 15px;
   margin: 0px auto 15px auto;
   width: 150px;
+  cursor: pointer;
+}
+
+.more-btn:hover {
+  background-color: rgb(255, 117, 36);
 }
 
 .navbar-wrapper {
-  padding: 15px 15px;
+  padding: 10px 15px;
   background-color: rgb(0, 0, 0);
   position: sticky;
   top: 0;
@@ -105,12 +119,25 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 900px;
+  /* max-width: 900px; */
   margin: 0 auto;
 }
 
-.logo{
-  max-width: 200px;
+.logo-wrapper {
+  display: flex;
+  align-items: center
+}
+
+.logo-text {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(255, 176, 58);
+}
+
+.logo-icon{
+  height: 50px;
+  padding-right: 5px;
 }
 
 .navbar-favorite-btn-icon {
