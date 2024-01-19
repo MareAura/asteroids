@@ -8,6 +8,7 @@ import { registerLocale } from  "react-datepicker";
 import { enGB } from 'date-fns/locale';
 import comet from './assets/comet.png';
 import cometGrey from './assets/comet-grey.png'
+import LoadingSpinner from './LoadingSpinner';
 
 
 
@@ -75,9 +76,8 @@ function AsteroidsList(props) {
           />
       </div>
       <span>{distanceUnitButton}</span>
-      {isLoading 
-        ? <div className='loader'><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
-        : <><div className='asteroids-list'>
+      <LoadingSpinner isLoading={isLoading}>
+            <><div className='asteroids-list'>
             {asteroidsData.slice(0, asteroidsShown).map((asteroid) => {
               
               const isFavorite = props.favorite.some((item) => item.id === asteroid.id)
@@ -97,12 +97,10 @@ function AsteroidsList(props) {
               ) 
             })
           }
-      </div>
-      {!fullAsteroidsDataShown && <button onClick={() => setPage(page + 1)} className='more-btn'>Show more</button>}
-      </>
-      }
-      
-          
+          </div>
+          {!fullAsteroidsDataShown && <button onClick={() => setPage(page + 1)} className='more-btn'>Show more</button>}
+          </>
+      </LoadingSpinner>
     </div>
   )
 }

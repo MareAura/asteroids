@@ -8,6 +8,7 @@ import warningSignGrey from './assets/warning-sign-grey.png'
 import comet from './assets/comet.png';
 import cometGrey from './assets/comet-grey.png'
 import './asteroidPage.css'
+import LoadingSpinner from './LoadingSpinner';
 
 function AsteroidPage(props) {
 
@@ -29,9 +30,9 @@ function AsteroidPage(props) {
                 )
                 .then((response) => {
                     const convertedAsteroidData = convertAsteroidData(response.data)
-                    setAsteroidData(convertedAsteroidData);
+                    setAsteroidData(convertedAsteroidData)
                     setIsLoading(false)
-                });
+                })
       }, [])
     
 
@@ -81,76 +82,76 @@ function AsteroidPage(props) {
 
   return (
     <div>
-        {isLoading 
-        ? <div className='loader'><div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
-        : <>{asteroidData ? 
-            <div className='asteroid-info'>
-                <div className='asteroid-name'>Asteroid {asteroidData.name}</div>
-                <div className='favorite-btn-wrapper'>
-                    {!isFavorite 
-                        ?<button onClick={() => props.addFavorite(asteroidData)} className='favorite-btn-big' title='Add to favorite'>
-                            Add to favorite<img src={cometGrey} alt='add to favorite asteroid' className='favorite-btn-big-icon'/>
-                        </button>
-                        :<button onClick={() => props.removeFavorite(asteroidId)} className='favorite-btn-big' title='Remove from favorite'>
-                            Remove from favorite<img src={comet} alt='remove favorite asteroid' className='favorite-btn-big-icon'/>
-                        </button>
+
+        <LoadingSpinner isLoading={isLoading}>
+        <>{asteroidData &&
+                <div className='asteroid-info'>
+                    <div className='asteroid-name'>Asteroid {asteroidData.name}</div>
+                    <div className='favorite-btn-wrapper'>
+                        {!isFavorite 
+                            ?<button onClick={() => props.addFavorite(asteroidData)} className='favorite-btn-big' title='Add to favorite'>
+                                Add to favorite<img src={cometGrey} alt='add to favorite asteroid' className='favorite-btn-big-icon'/>
+                            </button>
+                            :<button onClick={() => props.removeFavorite(asteroidId)} className='favorite-btn-big' title='Remove from favorite'>
+                                Remove from favorite<img src={comet} alt='remove favorite asteroid' className='favorite-btn-big-icon'/>
+                            </button>
+                        }
+                    </div>
+                    <div className='asteroid-info-line'> 
+                        <img src={diameterIcon} alt='diameter icon'/>
+                        Estimated diameter, meters: {asteroidData.diameterMin} (min) - {asteroidData.diameterMax} (max)
+                    </div>
+                    {asteroidData.dangerous 
+                        ? <div className='asteroid-info-line'><img src={warningSign} alt='warning sign icon'/>Dangerous!</div> 
+                        : <div className='asteroid-info-line'><img src={warningSignGrey} alt='warning sign icon'/>Not dangerous</div>
                     }
-                </div>
-                <div className='asteroid-info-line'> 
-                    <img src={diameterIcon} alt='diameter icon'/>
-                    Estimated diameter, meters: {asteroidData.diameterMin} (min) - {asteroidData.diameterMax} (max)
-                </div>
-                {asteroidData.dangerous 
-                    ? <div className='asteroid-info-line'><img src={warningSign} alt='warning sign icon'/>Dangerous!</div> 
-                    : <div className='asteroid-info-line'><img src={warningSignGrey} alt='warning sign icon'/>Not dangerous</div>
-                }
-
-                <div className='asteroid-info-header'>Detailed information about all approaches of asteroid {asteroidData.name}</div>
-
-                <div className='unit-btns'>
-                    {velocityUnitButton}
-                    {distanceUnitButton}
-                </div>
-
-                <table className='asteroid-table'>
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Date</th>
-                            {velocityInKmH
-                                ? <th>Relative Velocity, km/hour</th>
-                                : <th>Relative Velocity, km/sec</th>
-                            }
-                            {distanceInKm 
-                                ? <th>Distance to Earth, km</th>
-                                : <th>Distance to Earth, lunar</th>
-                            }
-                            <th>Orbiting body</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {asteroidData.approachesData.map((data, index) => {
-                        return (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{data.fullDate}</td>
-                            {velocityInKmH 
-                                ? <td>{data.relativeVelocityKmPerH}</td>
-                                : <td>{data.relativeVelocityKmPerSec}</td>
-                            }
-                            {distanceInKm 
-                                ? <td>{data.distanceKm}</td>
-                                : <td>{data.distanceLunar}</td>
-                            }
-                            <td>{data.orbitingBody}</td>
-                        </tr>
-                        )
-                    })}
-                    </tbody>
-                </table>
-            </div>
-            : null}
-        </>}
+    
+                    <div className='asteroid-info-header'>Detailed information about all approaches of asteroid {asteroidData.name}</div>
+    
+                    <div className='unit-btns'>
+                        {velocityUnitButton}
+                        {distanceUnitButton}
+                    </div>
+    
+                    <table className='asteroid-table'>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Date</th>
+                                {velocityInKmH
+                                    ? <th>Relative Velocity, km/hour</th>
+                                    : <th>Relative Velocity, km/sec</th>
+                                }
+                                {distanceInKm 
+                                    ? <th>Distance to Earth, km</th>
+                                    : <th>Distance to Earth, lunar</th>
+                                }
+                                <th>Orbiting body</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {asteroidData.approachesData.map((data, index) => {
+                            return (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{data.fullDate}</td>
+                                {velocityInKmH 
+                                    ? <td>{data.relativeVelocityKmPerH}</td>
+                                    : <td>{data.relativeVelocityKmPerSec}</td>
+                                }
+                                {distanceInKm 
+                                    ? <td>{data.distanceKm}</td>
+                                    : <td>{data.distanceLunar}</td>
+                                }
+                                <td>{data.orbitingBody}</td>
+                            </tr>
+                            )
+                        })}
+                        </tbody>
+                    </table>
+                </div>}
+            </>
+        </LoadingSpinner>
     </div>
   )
 }

@@ -21,7 +21,7 @@ body {
 
 .main-content {
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto 15px auto;
   /* padding: 0 15px; */
   /* background-color:rgba(0, 0, 0, 0.945); */
   font-family: 'Open Sans', sans-serif;
@@ -190,6 +190,9 @@ body {
 @media (max-width: 500px) {
   .asteroid-card-wrapper {
     min-width: 200px
+  }
+  .logo-text {
+    font-size: 24px;
   }
 }
 
