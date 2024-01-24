@@ -122,6 +122,8 @@ tbody tr:hover {
 }
 
 
+/* ----------- scroll---------------- */
+
 /* width */
 .asteroid-table ::-webkit-scrollbar {
     width: 10px;
@@ -142,6 +144,9 @@ tbody tr:hover {
     background: rgb(255, 132, 16);
   }
 
+  /* ------------------------------- */
+
+  
 
   @media (max-width: 545px) {  
     .unit-btn {

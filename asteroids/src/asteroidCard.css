@@ -26,6 +26,11 @@
     font-weight: bold;
     font-size: 20px;
     padding-bottom: 5px;
+    
+  }
+
+  .asterid-card-name a {
+    color: #ffb03a;
   }
 
   .asterid-card-info-line {

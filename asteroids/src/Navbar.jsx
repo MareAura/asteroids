@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from './assets/logo1.png'
 import comet from './assets/comet.png'
+import './Navbar.css/'
 
 function Navbar() {
   return (

@@ -1,4 +1,5 @@
 import React from 'react'
+import './LoadingSpinner.css/'
 
 export default function LoadingSpinner({isLoading, children}) {
   return (

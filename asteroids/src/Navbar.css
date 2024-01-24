@@ -1,0 +1,45 @@
+.navbar-wrapper {
+  padding: 10px 15px;
+  background-color: rgb(0, 0, 0);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid rgba(117, 57, 0)
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center
+}
+
+.logo-text {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffb03a;
+}
+
+.logo-icon{
+  height: 50px;
+  padding-right: 5px;
+}
+
+.navbar-favorite-btn-icon {
+  width: 35px;
+}
+
+.navbar-favorite-btn{
+  display: flex;
+  align-items: center;
+}
+
+.navbar-favorite-btn:hover {
+  scale: 1.1;
+}

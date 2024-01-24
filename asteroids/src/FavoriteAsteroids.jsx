@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './favoriteAsteroids.css'
+import './FavoriteAsteroids.css'
 import diameterIcon from './assets/diameter.png'
 import warningSign from './assets/warning-sign.png'
 import warningSignGrey from './assets/warning-sign-grey.png'

@@ -1,5 +1,5 @@
 import React from 'react'
-import './asteroidCard.css'
+import './AsteroidCard.css'
 import asteroidRock from './assets/asteroid-rock.png'
 import warningSign from './assets/warning-sign.png'
 import warningSignGrey from './assets/warning-sign-grey.png'

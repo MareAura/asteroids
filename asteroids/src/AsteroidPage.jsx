@@ -7,7 +7,7 @@ import warningSign from './assets/warning-sign.png'
 import warningSignGrey from './assets/warning-sign-grey.png'
 import comet from './assets/comet.png';
 import cometGrey from './assets/comet-grey.png'
-import './asteroidPage.css'
+import './AsteroidPage.css'
 import LoadingSpinner from './LoadingSpinner';
 
 function AsteroidPage(props) {
@@ -162,7 +162,7 @@ function convertAsteroidData(rawAsteroid) {
 
         const allApproachesData = rawApproachesData.map((rawApproachData) => {
             const approachData = {
-                fullDate: rawApproachData.close_approach_date_full,
+                fullDate: new Date(rawApproachData.close_approach_date_full).toUTCString().slice(4, 22),
                 relativeVelocityKmPerSec: Math.round(rawApproachData.relative_velocity.kilometers_per_second * 100) / 100,
                 relativeVelocityKmPerH: Math.round(rawApproachData.relative_velocity.kilometers_per_hour),
                 distanceKm: Math.round(rawApproachData.miss_distance.kilometers),
