@@ -9,6 +9,9 @@ import comet from './assets/comet.png';
 import cometGrey from './assets/comet-grey.png'
 import './AsteroidPage.css'
 import LoadingSpinner from './LoadingSpinner';
+import dayjs from "dayjs"
+import { APPROACH_DATE_FORMAT } from './constants';
+
 
 function AsteroidPage(props) {
 
@@ -36,7 +39,10 @@ function AsteroidPage(props) {
                     setIsLoading(false)
                 })
                 .catch( (error) => {
-                    error && setError(error.message)
+                    console.log(error)
+                    if (error.response.status === 404) {
+                        setError("Asteroid with id " + asteroidId + ' not found')
+                    }
                   })
       }, [])
     
@@ -163,13 +169,17 @@ function AsteroidPage(props) {
   )
 }
 
+
 function convertAsteroidData(rawAsteroid) {
 
     function convertApproachesData(rawApproachesData){
 
         const allApproachesData = rawApproachesData.map((rawApproachData) => {
+            const approachFullDate = dayjs(rawApproachData.close_approach_date_full, 'YYYY-MMM-DD HH:mm')
+
             const approachData = {
-                fullDate: new Date(rawApproachData.close_approach_date_full).toUTCString().slice(4, 22),
+                fullDate: approachFullDate.format(APPROACH_DATE_FORMAT),
+
                 relativeVelocityKmPerSec: Math.round(rawApproachData.relative_velocity.kilometers_per_second * 100) / 100,
                 relativeVelocityKmPerH: Math.round(rawApproachData.relative_velocity.kilometers_per_hour),
                 distanceKm: Math.round(rawApproachData.miss_distance.kilometers),

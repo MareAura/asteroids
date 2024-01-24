@@ -11,7 +11,9 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import 'dayjs/locale/en-gb'
+import dayjs from "dayjs"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { APPROACH_DATE_FORMAT } from './constants';
 
 
 function AsteroidsList(props) {
@@ -45,7 +47,6 @@ function AsteroidsList(props) {
     });
 
     useEffect(() => {
-      setIsLoading(true)
       axios
               .get(
                   `https://www.neowsapp.com/rest/v1/feed?start_date=${date}&end_date=${date}?api_key=3O93YcjVXfreFogJawULO4fHalcOlw8GYPn9BVut`
@@ -57,7 +58,8 @@ function AsteroidsList(props) {
                   setError('')
               })
               .catch( (error) => {
-                error && setError(error.message)
+                console.error(error)
+                setError(error.message)
               })
               
     }, [date])
@@ -88,10 +90,14 @@ function AsteroidsList(props) {
               <DemoContainer components={['DatePicker']}>
                 <DatePicker 
                   sx={{ backgroundColor: 'black'}}
-                  date={date}
+                  defaultValue={dayjs(date)}
                   onChange={(newDate) => {
-                      setDate(newDate.format("YYYY-MM-DD"))
-                      setPage(1)
+                      if (newDate.isValid()) {
+                        setDate(newDate.format("YYYY-MM-DD"))
+                        setPage(1)
+                      } else {
+                        setError("Invalid date")
+                      }
                     }
                   }
                   label="Pick a date"
@@ -105,6 +111,7 @@ function AsteroidsList(props) {
         ? <div className='error-message'>{error}</div> 
         : <LoadingSpinner isLoading={isLoading}>
               <><div className='asteroids-list'>
+              {asteroidsData.length === 0 && <div className='error-message'>No asteroids found for this day. Pick another date</div>}  
               {asteroidsData.slice(0, asteroidsShown).map((asteroid) => {
                 
                 const isFavorite = props.favorite.some((item) => item.id === asteroid.id)
@@ -135,13 +142,15 @@ function AsteroidsList(props) {
 
 
 function convertAsteroidsData(rawData) {
-
-    const nearEarthObjects = Object.values(rawData.near_earth_objects)[0]
+    const nearEarthObjects = rawData.element_count > 0 ? Object.values(rawData.near_earth_objects)[0] : []
   
     const asteroids = nearEarthObjects.map((rawAsteroid) => {
+
+          const approachFullDate = dayjs(rawAsteroid.close_approach_data[0].close_approach_date_full, 'YYYY-MMM-DD HH:mm')
+
           const asteroid = {
             id: rawAsteroid.id,
-            closeApproachDate: new Date(rawAsteroid.close_approach_data[0].close_approach_date_full).toUTCString().slice(4, 22),
+            closeApproachDate:  approachFullDate.format(APPROACH_DATE_FORMAT),
             name: rawAsteroid.name[0] === '(' 
                   ? rawAsteroid.name.slice(1, rawAsteroid.name.length - 1) 
                   : rawAsteroid.name,
