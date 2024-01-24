@@ -22,6 +22,8 @@ function AsteroidPage(props) {
 
     const [isLoading, setIsLoading] = useState(true)
 
+    const [error, setError] = useState('')
+
     useEffect(() => {
         setIsLoading(true)
         axios
@@ -33,6 +35,9 @@ function AsteroidPage(props) {
                     setAsteroidData(convertedAsteroidData)
                     setIsLoading(false)
                 })
+                .catch( (error) => {
+                    error && setError(error.message)
+                  })
       }, [])
     
 
@@ -82,7 +87,8 @@ function AsteroidPage(props) {
 
   return (
     <div>
-
+        { error 
+        ? <div className='error-message'>{error}</div> :
         <LoadingSpinner isLoading={isLoading}>
         <>{asteroidData &&
                 <div className='asteroid-info'>
@@ -152,7 +158,8 @@ function AsteroidPage(props) {
                 </div>}
             </>
         </LoadingSpinner>
-    </div>
+        }
+    </div> 
   )
 }
 

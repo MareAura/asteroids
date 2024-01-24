@@ -84,3 +84,11 @@
 .more-btn:hover {
   background-color: rgb(255, 117, 36);
 }
+
+.error-message {
+  margin-top: 20px;
+  font-size: 20px;
+  color: rgb(247, 9, 1);
+  font-weight: bold;
+  background-color: black;
+}

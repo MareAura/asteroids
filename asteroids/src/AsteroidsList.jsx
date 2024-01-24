@@ -102,7 +102,7 @@ function AsteroidsList(props) {
       </div>
       <span>{distanceUnitButton}</span>
       { error 
-        ? <div>{error}</div> 
+        ? <div className='error-message'>{error}</div> 
         : <LoadingSpinner isLoading={isLoading}>
               <><div className='asteroids-list'>
               {asteroidsData.slice(0, asteroidsShown).map((asteroid) => {
