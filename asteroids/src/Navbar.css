@@ -43,3 +43,9 @@
 .navbar-favorite-btn:hover {
   scale: 1.1;
 }
+
+@media (max-width: 500px) {
+  .logo-text {
+    font-size: 24px;
+  }
+}

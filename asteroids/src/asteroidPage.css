@@ -159,3 +159,9 @@ tbody tr:hover {
         padding: 5px;
     }
   }
+
+  @media (max-width: 460px) {
+    table {
+      font-size: 12px;
+    }
+  }
