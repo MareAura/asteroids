@@ -52,28 +52,28 @@ export const AsteroidCard = (props) => {
                     </Link>
               </div>
               <div className='asterid-card-info-line'>
-                <img src={diameterIcon} alt='diameter icon'/> 
+                <img src={diameterIcon} alt='diameter icon' title='Diameter'/> 
                 {props.asteroid.diameter} {props.asteroid.diameter !== 'unknown' && 'meters'}
               </div>
               <div className='asterid-card-info-line'>
-                <img src={clock} alt='clock icon'/>
+                <img src={clock} alt='clock icon' title='Approach date and time'/>
                 {props.asteroid.closeApproachDate}
               </div>
               {props.distanceInKm 
                 ? <div className='asterid-card-info-line'>
-                    <img src={distance} alt='distance icon'/>{props.asteroid.distanceKm} km
+                    <img src={distance} alt='distance icon' title='Distance to Earth'/>{props.asteroid.distanceKm} km
                   </div> 
                 : <div className='asterid-card-info-line'>
-                    <img src={distance} alt='distance icon'/>{props.asteroid.distanceLunar} lunar
+                    <img src={distance} alt='distance icon' title='Distance to Earth'/>{props.asteroid.distanceLunar} lunar
                   </div>
               }
               
               {props.asteroid.dangerous 
                 ? <div className='asterid-card-info-line'>
-                    <img src={warningSign} alt='warning sign icon'/>Dangerous!
+                    <img src={warningSign} alt='warning sign icon' title='Is potentially dangerous?'/>Dangerous!
                   </div> 
                 : <div className='asterid-card-info-line'>
-                    <img src={warningSignGrey} alt='warning sign icon'/>Not dangerous
+                    <img src={warningSignGrey} alt='warning sign icon' title='Is potentially dangerous?'/>Not dangerous
                   </div>}
     </div>
   )

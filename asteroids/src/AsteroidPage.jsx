@@ -114,8 +114,12 @@ function AsteroidPage(props) {
                         Estimated diameter, meters: {asteroidData.diameterMin} (min) - {asteroidData.diameterMax} (max)
                     </div>
                     {asteroidData.dangerous 
-                        ? <div className='asteroid-info-line'><img src={warningSign} alt='warning sign icon'/>Dangerous!</div> 
-                        : <div className='asteroid-info-line'><img src={warningSignGrey} alt='warning sign icon'/>Not dangerous</div>
+                        ? <div className='asteroid-info-line'>
+                            <img src={warningSign} alt='warning sign icon' title='Is potentially dangerous?'/>Dangerous!
+                        </div> 
+                        : <div className='asteroid-info-line'>
+                            <img src={warningSignGrey} alt='warning sign icon' title='Is potentially dangerous?'/>Not dangerous
+                        </div>
                     }
     
                     <div className='asteroid-info-header'>Detailed information about all approaches of asteroid {asteroidData.name}</div>
