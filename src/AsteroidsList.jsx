@@ -91,6 +91,7 @@ function AsteroidsList(props) {
                 <DatePicker 
                   sx={{ backgroundColor: 'black'}}
                   defaultValue={dayjs(date)}
+                  maxDate={dayjs('31-12-2200', "DD-MM-YYYY")}
                   onChange={(newDate) => {
                       if (newDate.isValid()) {
                         setDate(newDate.format("YYYY-MM-DD"))
