@@ -14,6 +14,7 @@ import 'dayjs/locale/en-gb'
 import dayjs from "dayjs"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { APPROACH_DATE_FORMAT } from './constants.js';
+import { API_KEY } from './constants.js';
 
 
 function AsteroidsList(props) {
@@ -49,7 +50,7 @@ function AsteroidsList(props) {
     useEffect(() => {
       axios
               .get(
-                  `https://www.neowsapp.com/rest/v1/feed?start_date=${date}&end_date=${date}?api_key=3O93YcjVXfreFogJawULO4fHalcOlw8GYPn9BVut`
+                  `https://www.neowsapp.com/rest/v1/feed?start_date=${date}&end_date=${date}?api_key=${API_KEY}`
               )
               .then((response) => {
                   const convertedAsteroidsData = convertAsteroidsData(response.data)

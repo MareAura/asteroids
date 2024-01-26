@@ -1,3 +1,5 @@
 const APPROACH_DATE_FORMAT = "DD MMM YYYY, HH:mm"
+const API_KEY =  import.meta.env.VITE_NASA_API_KEY
 
-export { APPROACH_DATE_FORMAT }
+
+export { APPROACH_DATE_FORMAT, API_KEY }

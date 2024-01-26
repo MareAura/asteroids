@@ -10,7 +10,7 @@ import cometGrey from './assets/comet-grey.png'
 import './AsteroidPage.css'
 import LoadingSpinner from './LoadingSpinner';
 import dayjs from "dayjs"
-import { APPROACH_DATE_FORMAT } from './constants';
+import { API_KEY, APPROACH_DATE_FORMAT } from './constants';
 
 
 function AsteroidPage(props) {
@@ -31,7 +31,7 @@ function AsteroidPage(props) {
         setIsLoading(true)
         axios
                 .get(
-                    `https://www.neowsapp.com/rest/v1/neo/${asteroidId}?api_key=3O93YcjVXfreFogJawULO4fHalcOlw8GYPn9BVut`
+                    `https://www.neowsapp.com/rest/v1/neo/${asteroidId}?api_key=${API_KEY}`
                 )
                 .then((response) => {
                     const convertedAsteroidData = convertAsteroidData(response.data)
