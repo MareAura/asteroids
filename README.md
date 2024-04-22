@@ -18,7 +18,10 @@ The project is developed on **JavaScript** using the **React** library.
 
 ## Running the project
 
-Clone down this repository. You will need node and npm installed globally on your machine.
+### Prerequisites
+
+- Node and npm installed globally
+- You also need NASA API key, which can be obtained from https://api.nasa.gov/. Once you have the key, create a copy of the file `.env` with a name `.env.local`, and provide the value for the env variable.
 
 Installation:
 
